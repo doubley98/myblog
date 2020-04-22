@@ -8202,3 +8202,16 @@ Python auto-reloader enabled
 [pid: 2274|app: 0|req: 10/19] 218.9.127.139 () {40 vars in 811 bytes} [Wed Apr 22 14:31:33 2020] GET /addBlog/ => generated 3037 bytes in 5 msecs (HTTP/1.1 200) 4 headers in 124 bytes (1 switches on core 0)
 [pid: 2273|app: 0|req: 7/20] 218.9.127.139 () {40 vars in 811 bytes} [Wed Apr 22 14:31:36 2020] GET /ownBlog/ => generated 4758 bytes in 17 msecs (HTTP/1.1 200) 4 headers in 132 bytes (1 switches on core 0)
 [pid: 2274|app: 0|req: 11/21] 218.9.127.139 () {40 vars in 812 bytes} [Wed Apr 22 14:31:43 2020] GET /blogList/ => generated 9203 bytes in 6 msecs (HTTP/1.1 200) 4 headers in 124 bytes (1 switches on core 0)
+[pid: 2274|app: 0|req: 12/22] 218.9.127.139 () {42 vars in 843 bytes} [Wed Apr 22 14:57:04 2020] GET /blogList/ => generated 9203 bytes in 6 msecs (HTTP/1.1 200) 4 headers in 124 bytes (1 switches on core 0)
+[pid: 2270|app: -1|req: -1/23] 218.9.127.139 () {40 vars in 734 bytes} [Wed Apr 22 14:57:04 2020] GET /static/vue-2.5.16.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 0 headers in 29 bytes (0 switches on core 0)
+[pid: 2273|app: -1|req: -1/24] 218.9.127.139 () {40 vars in 732 bytes} [Wed Apr 22 14:57:04 2020] GET /static/axios.min.js => generated 0 bytes in 0 msecs (HTTP/1.1 304) 0 headers in 29 bytes (0 switches on core 0)
+[pid: 2270|app: -1|req: -1/25] 218.9.127.139 () {40 vars in 807 bytes} [Wed Apr 22 14:57:04 2020] GET /static/bootstrap-3.3.7-dist/css/bootstrap.min.css => generated 0 bytes in 0 msecs (HTTP/1.1 304) 0 headers in 29 bytes (0 switches on core 0)
+[pid: 2273|app: -1|req: -1/26] 218.9.127.139 () {42 vars in 911 bytes} [Wed Apr 22 14:57:04 2020] GET /static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2 => generated 0 bytes in 0 msecs (HTTP/1.1 304) 0 headers in 29 bytes (0 switches on core 0)
+[pid: 2274|app: 0|req: 13/27] 218.9.127.139 () {40 vars in 811 bytes} [Wed Apr 22 14:57:08 2020] GET /ownBlog/ => generated 4758 bytes in 6 msecs (HTTP/1.1 200) 4 headers in 132 bytes (1 switches on core 0)
+[pid: 2273|app: 0|req: 8/28] 218.9.127.139 () {40 vars in 824 bytes} [Wed Apr 22 14:57:09 2020] GET /getOwnComments/ => generated 5103 bytes in 7 msecs (HTTP/1.1 200) 4 headers in 132 bytes (1 switches on core 0)
+{'username': 'doubley', 'mobile': '15636511732', 'email': '', 'date_joined': '2020-04-11 10:20:56'}
+[pid: 2272|app: 0|req: 2/29] 218.9.127.139 () {40 vars in 831 bytes} [Wed Apr 22 14:57:09 2020] GET /ownInformation/ => generated 3093 bytes in 11 msecs (HTTP/1.1 200) 4 headers in 132 bytes (1 switches on core 0)
+[pid: 2274|app: 0|req: 14/30] 218.9.127.139 () {40 vars in 831 bytes} [Wed Apr 22 14:57:10 2020] GET /getOwnComments/ => generated 5103 bytes in 13 msecs (HTTP/1.1 200) 4 headers in 132 bytes (1 switches on core 0)
+{'username': 'doubley', 'mobile': '15636511732', 'email': '', 'date_joined': '2020-04-11 10:20:56'}
+[pid: 2273|app: 0|req: 9/31] 218.9.127.139 () {40 vars in 831 bytes} [Wed Apr 22 14:57:11 2020] GET /ownInformation/ => generated 3093 bytes in 10 msecs (HTTP/1.1 200) 4 headers in 132 bytes (1 switches on core 0)
+[pid: 2272|app: 0|req: 3/32] 218.9.127.139 () {40 vars in 817 bytes} [Wed Apr 22 14:57:12 2020] GET /ownBlog/ => generated 4758 bytes in 11 msecs (HTTP/1.1 200) 4 headers in 132 bytes (1 switches on core 0)
