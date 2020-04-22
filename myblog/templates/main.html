@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOGS</title>
+</head>
+
+<link rel="stylesheet" href="{{ static('bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
+<script src="{{ static('vue-2.5.16.js') }}"></script>
+<script src="{{ static('axios.min.js') }}"></script>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+
+<body>
+<div class="container" id="app" v-cloak>
+    <div class="row">
+        <div class="row">
+            <hr>
+        </div>
+        <div class="col-md-12">
+            <ul class="nav nav-pills">
+                <li class="active"><a href="{{ url('blog:bloglist') }}">BLOGS</a></li>
+                <li><a href="{{ url('blog:ownblog') }}">我的博客</a></li>
+                <li><a href="{{ url('comment:owncomments')}}">我的评论</a></li>
+                <li><a href="{{ url('user:owninformation')}}">个人信息</a></li>
+                <a href="{{ url('user:owninformation')}}" class="btn col-md-offset-6" v-if="username">欢迎您: [[username]]</a>
+                <a href="{{ url('user:login') }}" class="btn col-md-offset-7" v-else>登录</a>|
+                <a href="{{ url('user:logout') }}" class="btn" v-if="username">注销</a>
+                <a href="{{ url('user:register') }}" class="btn" v-else>注册</a>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <hr>
+    </div>
+    <div class="col-md-12 row">
+        <div class="col-md-5">
+            <input type="text" class="form-control col-md-5" v-model="keyword" placeholder="输入文章标题或者作者名称以检索文章"
+                   @blur="searchList">
+        </div>
+        <a href="{{ url('blog:addblog') }}" class="btn btn-danger col-md-offset-6">CREATE</a>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="list-group">
+                <li class="list-group-item" v-for="(item, index) in dataShow" :key="index">
+                    <div>
+                        <h4><a :href="host+'/detail/'+item.id">[[item.title]]</a></h4>
+                        <span class="glyphicon glyphicon-user"> [[ item.author ]]</span>
+                        <span class="glyphicon glyphicon-time col-md-offset-10">
+                                [[ item.createtime ]]</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-offset-5">
+            <input class="btn btn-primary" type="submit" value="上一页" @click="lastPage"/>
+            <input class="btn btn-primary" type="submit" value="下一页" @click="nextPage"/>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        delimiters: ['[[', ']]'],
+        data: {
+            keyword: "",
+            username: "",
+            host: "http://182.92.219.208:9000",
+            // 假设这是后台传来的数据来源
+            data: {{ blogList|safe }},
+            // 所有页面的数据
+            totalPage: [],
+            // 每页显示数量
+            pageSize: 10,
+            // 共几页
+            pageNum: 0,
+            // 当前显示的数据
+            dataShow: "",
+            // 默认当前显示第一页
+            currentPage: 0,
+        },
+        methods: {
+            nextPage() {
+                if (this.currentPage === this.pageNum - 1) return;
+                this.dataShow = this.totalPage[++this.currentPage];
+            },
+            lastPage() {
+                if (this.currentPage === 0) return;
+                this.dataShow = this.totalPage[--this.currentPage];
+            },
+            //分页实现
+            paging() {
+                this.pageNum = Math.ceil(this.data.length, 5);
+                for (i = 0; i < this.pageNum; i++) {
+                    // totalPage是一个临时的存储容器，用来进行数据的切分
+                    this.totalPage[i] = this.data.slice(this.pageSize * i, this.pageSize * (i + 1))
+                }
+                this.dataShow = this.totalPage[this.currentPage];
+            },
+            searchList() {
+                axios.get(this.host + "/searchList/?keyword=" + this.keyword).then(response => {
+                    if (response.data.status !== 200) {
+                        alert(response.data.msg)
+                    } else {
+                        this.data = response.data.blogList;
+                        this.paging()
+                    }
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+            getUsername() {
+                var strCookie = document.cookie;
+                var arrCookie = strCookie.split("; ");
+                for (var i = 0; i < arrCookie.length; i++) {
+                    var arr = arrCookie[i].split("=");
+                    //找到名称为userId的cookie，并返回它的值
+                    if ("username" === arr[0]) {
+                        this.username = arr[1];
+                        break;
+                    }
+                }
+            }
+        },
+        mounted() {
+            this.getUsername();
+            this.paging()
+        },
+    })
+</script>
+</html>

@@ -1,0 +1,15 @@
+asgiref==3.2.7
+Django==2.1.8
+django-cors-headers==3.2.1
+django-redis==4.11.0
+djangorestframework-jwt==1.11.0
+image==1.5.28
+Jinja2==2.11.1
+MarkupSafe==1.1.1
+mysqlclient==1.4.6
+Pillow==7.1.1
+PyJWT==1.7.1
+PyMySQL==0.9.3
+pytz==2019.3
+redis==3.4.1
+sqlparse==0.3.1

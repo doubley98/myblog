@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWNINFORMATION</title>
+</head>
+
+<link rel="stylesheet" href="{{ static('bootstrap-3.3.7-dist/css/bootstrap.min.css') }}">
+<script src="{{ static('vue-2.5.16.js') }}"></script>
+<script src="{{ static('axios.min.js') }}"></script>
+<style>
+    [v-cloak] {
+        display: none;
+    }
+</style>
+
+<body>
+    <div class="container" id="app" v-cloak>
+        <div class="row">
+            <div class="row">
+                <hr>
+            </div>
+            <div class="col-md-12">
+                <ul class="nav nav-pills">
+                    <li><a href="{{ url('blog:bloglist') }}">BLOGS</a></li>
+                    <li><a href="{{ url('blog:ownblog') }}">我的博客</a></li>
+                    <li><a href="{{ url('comment:owncomments')}}">我的评论</a></li>
+                    <li class="active"><a href="{{ url('user:owninformation')}}">个人信息</a></li>
+                    <a href="{{ url('user:owninformation')}}" class="btn col-md-offset-6" v-if="username">欢迎您: [[username]]</a>
+                    <a href="{{ url('user:login') }}" class="btn col-md-offset-7" v-else>登录</a>|
+                    <a href="{{ url('user:logout') }}" class="btn" v-if="username">注销</a>
+                    <a href="{{ url('user:register') }}" class="btn" v-else>注册</a>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <hr>
+        </div>
+        <div class="row">
+            <table class="table table-bordered">
+                <tr>
+                    <th>用户名称：</th>
+                    <td>[[ information.username ]]</td>
+                </tr>
+                <tr>
+                    <th>绑定手机：</th>
+                    <td>[[ information.mobile ]]</td>
+                </tr>
+                <tr>
+                    <th>绑定邮箱：</th>
+                    <td>[[ information.email ]]</td>
+                </tr>
+                <tr>
+                    <th>注册时间：</th>
+                    <td>[[ information.date_joined ]]</td>
+                </tr>
+              </table>
+        </div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el: "#app",
+        delimiters:["[[","]]"],
+        data: {
+            username:"",
+            host: "http://182.92.219.208:9000",
+            // 假设这是后台传来的数据来源
+            information:{{ information|safe }},
+        },
+        methods: {
+            getUsername() {
+                var strCookie = document.cookie;
+                var arrCookie = strCookie.split("; ");
+                for (var i = 0; i < arrCookie.length; i++) {
+                    var arr = arrCookie[i].split("=");
+                    //找到名称为userId的cookie，并返回它的值
+                    if ("username" == arr[0]) {
+                        this.username = arr[1];
+                        break;
+                    }
+                }
+            }
+        },
+        mounted() {
+            this.getUsername()
+        },
+    })
+</script>
+
+</html>
